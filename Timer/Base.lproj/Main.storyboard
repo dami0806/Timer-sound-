@@ -124,6 +124,7 @@
                     <connections>
                         <outlet property="mainLable" destination="jnn-P2-MvL" id="Ls2-Qs-m2m"/>
                         <outlet property="slider" destination="aNg-GO-lmR" id="FxX-KJ-TJn"/>
+                        <outlet property="startBtn" destination="Pyn-x1-9d4" id="wzo-2j-Exu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

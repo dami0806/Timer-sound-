@@ -17,11 +17,13 @@ class ViewController: UIViewController {
     weak var timer: Timer?
     var num:Int = 0
     
+    @IBOutlet weak var startBtn: UIButton!
+    var stop:Int = 0 //stop<->start 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+    
         configureUI()
         
     }
@@ -31,6 +33,8 @@ class ViewController: UIViewController {
         slider.setValue(0.5, animated: true)
         num = 0
         timer?.invalidate()
+        startBtn.setTitle("Start", for: .normal)
+        startBtn.backgroundColor = #colorLiteral(red: 0, green: 0.7525901198, blue: 0.98887676, alpha: 1)
     }
 
     @IBAction func sliderChanged(_ sender: UISlider) {
@@ -45,9 +49,28 @@ class ViewController: UIViewController {
     
     @IBAction func startTappedBtn(_ sender: UIButton) {
         //1초당 줄어들기
-        
+       
         timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval:1.0, target: self, selector: #selector(afterOneSec), userInfo: nil, repeats: true)
+//        timer = Timer.scheduledTimer(timeInterval:1.0, target: self, selector: #selector(afterOneSec), userInfo: nil, repeats: true)
+        
+        //stop = 0 일때 timer 진행중
+        if stop == 0{
+            startBtn.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        startBtn.setTitle("Stop", for: .normal)
+            stop=1
+            //시간 가기
+            timer = Timer.scheduledTimer(timeInterval:1.0, target: self, selector: #selector(afterOneSec), userInfo: nil, repeats: true)
+           
+          
+        }
+        else{
+            startBtn.setTitle("Start", for: .normal)
+            stop=0
+            stopTimerTest()
+            
+            
+        }
+        
         
 //        timer =  Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [self] _ in
 //                // Do what you need to do repeatedly
@@ -56,7 +79,17 @@ class ViewController: UIViewController {
 //
 //            }
         
+        
+        
     }
+    
+    func stopTimerTest() {
+      timer?.invalidate()
+      timer = nil
+      startBtn.backgroundColor = #colorLiteral(red: 0, green: 0.7525901198, blue: 0.98887676, alpha: 1)
+    }
+    
+    
     @objc func afterOneSec(){
         if num>0{
             num -= 1
